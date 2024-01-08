@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import axios from "axios"
+import Product from "../components/Product"
 
 const HomePage = () => {
     const [products, setProducts] = useState([])
@@ -27,10 +28,10 @@ const HomePage = () => {
             <div className="mt-5">
                 { isLoading ? ("Loading Products") : (
                     <>                        
-                        {products.length < 0 ? "...Loading" : (products.map((product) => {
+                        {products.length < 0 ? "...Loading" : (products.map((product, idx) => {
                             return (
                                 <div>
-                                    {product.name}
+                                    <Product key={idx} product={product}/>
                                 </div>
                             )
                         }))}
