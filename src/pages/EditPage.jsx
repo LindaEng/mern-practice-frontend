@@ -71,7 +71,7 @@ const EditPage = () => {
                         <label>Image URL</label>
                         <input type="text" name="image" value={editableProduct.image} onChange={onChange} className="w-full block border p-3 text-gray-600 rounded focus:outline-none focus:shadow-outline focus:border-blue-200 placeholder-gray-400" placeholder="image"></input>
                     </div>
-                    <button className="block w-full mt-6 bg-cyan-500 text-white rounded-sm px-4 py-2 font-bold">UPDATE ME!</button>
+                    <button className="block w-full mt-6 bg-cyan-700 text-white rounded-sm px-4 py-2 font-bold">UPDATE ME!</button>
                 </div>
             </form>
         </div>
