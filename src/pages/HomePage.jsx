@@ -1,16 +1,21 @@
-import { useState, useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import axios from "axios"
 import Product from "../components/Product"
 
+
 const HomePage = () => {
     const [products, setProducts] = useState([])
     const [isLoading, setIsLoading] = useState(false)
+    const VITE_API_URL = import.meta.env.VITE_API_URL
+
+    console.log(VITE_API_URL);
 
     const getProducts = async () => {
         try {
             setIsLoading(true)
-            const response = await axios(`http://localhost:3000/api/products/`)
+            const response = await axios(`${VITE_API_URL}/api/products/`)
+            console.log("HEREE",response.data.products);
             setProducts(response.data.products)
             setIsLoading(false)
         } catch (error) {
@@ -21,7 +26,7 @@ const HomePage = () => {
     const deleteProduct = async (productId) => {     
         try {
             console.log("PRODUCT ID FROM HOME PAGE ", productId);
-            await axios.delete(`http://localhost:3000/api/products/${productId}`)
+            await axios.delete(`${VITE_API_URL}/api/products/${productId}`)
             setProducts((currentProducts) => currentProducts.filter((product) => product._id !== productId))
         } catch (error) {
             console.log(error);
@@ -42,7 +47,7 @@ const HomePage = () => {
             <div className="grid grid-cols-2 lag:grid-cols-4 gap-4 mt-5">
                 { isLoading ? ("Loading Products") : (
                     <>                        
-                        {products.length < 0 ? "...Loading" : (products.map((product, idx) => {
+                        {products.length <= 0 ? "...Loading" : (products.map((product, idx) => {
                             return (
                                 <div key={idx}>
                                     <Product key={idx} product={product} deleteProduct={deleteProduct}/>

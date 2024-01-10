@@ -3,8 +3,7 @@ import { useState, useEffect } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 
-const EditPage = () => {
-    
+const EditPage = () => {   
     const [editableProduct, setEditableProduct] = useState({
         name: "",
         quantity: 0,
@@ -14,11 +13,13 @@ const EditPage = () => {
 
     const { id } = useParams()
     const navigate = useNavigate()
+    const VITE_API_URL = import.meta.env.VITE_API_URL
+    
 
     const getProductById = async (id) => {
         try {
             console.log("EDIT GET ", id);
-            const response = await axios.get(`http://localhost:3000/api/products/${id}`)
+            const response = await axios.get(`${VITE_API_URL}/api/products/${id}`)
             setEditableProduct(response.data.product)
         } catch (error) {
             console.log(error)
@@ -29,7 +30,7 @@ const EditPage = () => {
         e.preventDefault()
         try {
             console.log(editableProduct)
-            const response = await axios.put(`http://localhost:3000/api/products/${id}`, editableProduct)
+            const response = await axios.put(`${VITE_API_URL}/api/products/${id}`, editableProduct)
             toast.success(`Successfully edited!`)
             navigate("/")
         } catch (error) {

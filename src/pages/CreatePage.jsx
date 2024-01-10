@@ -13,6 +13,7 @@ const CreatePage = () => {
     })
     const [isLoading, setIsLoading] = useState(false)
     const navigate = useNavigate()
+    const VITE_API_URL = import.meta.env.VITE_API_URL
 
     const onChange = (e) => {
         const {name, value} = e.target
@@ -30,7 +31,7 @@ const CreatePage = () => {
             return
         } try {
             setIsLoading(true)
-            const response = await axios.post(`http://localhost:3000/api/products`, formData)
+            const response = await axios.post(`${VITE_API_URL}/api/products`, formData)
             toast.success(`Saved ${response.data.product.name}`)
             setIsLoading(false)
             navigate("/")

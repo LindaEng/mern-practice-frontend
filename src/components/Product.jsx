@@ -1,7 +1,4 @@
 import { Link } from 'react-router-dom'
-import axios from 'axios'
-import { useEffect, useState } from 'react'
-
 
 const Product = ({product, deleteProduct}) => {
     const id = product._id
