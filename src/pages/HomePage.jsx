@@ -11,12 +11,20 @@ const HomePage = () => {
         try {
             setIsLoading(true)
             const response = await axios(`http://localhost:3000/api/products/`)
-            console.log('FROM BACKEND ',response.data.products);
             setProducts(response.data.products)
             setIsLoading(false)
-            console.log('PRODUDUDUDUCTS', products)
         } catch (error) {
             console.log(error)
+        }
+    }
+
+    const deleteProduct = async (productId) => {     
+        try {
+            console.log("PRODUCT ID FROM HOME PAGE ", productId);
+            await axios.delete(`http://localhost:3000/api/products/${productId}`)
+            setProducts((currentProducts) => currentProducts.filter((product) => product._id !== productId))
+        } catch (error) {
+            console.log(error);
         }
     }
 
@@ -36,8 +44,8 @@ const HomePage = () => {
                     <>                        
                         {products.length < 0 ? "...Loading" : (products.map((product, idx) => {
                             return (
-                                <div>
-                                    <Product key={idx} product={product}/>
+                                <div key={idx}>
+                                    <Product key={idx} product={product} deleteProduct={deleteProduct}/>
                                 </div>
                             )
                         }))}
